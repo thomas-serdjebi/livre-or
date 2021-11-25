@@ -2,11 +2,6 @@
 
     require ('connexiondb.php');
 
-
-
-
-
-
 ?>
 
 
@@ -40,38 +35,27 @@
                     
                     <input type="password" class="basicinput" name="mdp" placeholder="Mot de passe">
 
+                    <input type="password" class="basicinput" name="confirmmdp" placeholder="Confirmez votre mot de passe">
+
+                    <input type="submit" class="submitinput" name="inscription" value="S'inscrire"><br>
+
                 </form>
 
-                    
-                        
+                <!-- DEJA INSCRIT ? CONNEXION -->
 
+                <div> Déjà inscrit ? Connectez vous ci-dessous ! </div>
 
+                <!-- BOUTON LIEN VERS PAGE CONNEXION -->
 
+                <div><a href="connexion.php"><input type="button" class="linkbutton" value="Connexion"></a></div>
 
-
-
-
-
-
+                
 
             </section>
             
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </main>
 
+        <!-- AJOUTER LE FOOTER REQUIRE -->
 
 
 

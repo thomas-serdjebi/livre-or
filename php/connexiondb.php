@@ -16,10 +16,4 @@ if (!$mysqli) {
     $err_connexion = "La connexion à la base de données '".$BDD['db']."' a échoué ";
 }
 
-
-elseif ($mysqli) {
-
-    echo "La connexion a réussi";
-}
-
 ?>
