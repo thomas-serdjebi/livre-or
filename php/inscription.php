@@ -94,12 +94,14 @@
 
             if ($valid) {
 
-                $inscription = "INSERT INTO utilisateurs (login,password) VALUES ('$login','".md5($mdp)."')";
+                $inscription = "INSERT INTO utilisateurs (login,password) VALUES ('$login','".md5($mdp)."')"; //REQUETE CREATION UTILISATEURS AVEC MDP HACH
 
                 if (mysqli_query($mysqli, $inscription)) {
 
                     echo "Vous êtes inscrit(e).";
                     $inscriptionok = "Vous êtes inscrits.";
+
+                    //RAJOUTER LE HEADER LOCATION VERS CONNEXION
                 }
 
             }
@@ -140,13 +142,17 @@
 
                 <form action="inscription.php" method="post">
 
-                    <input type="text" class="basicinput" name="login" placeholder="Login">
+                    <div><?php if (isset($err_login)) { echo $err_login} ;?></div>
+                    <div><input type="text" class="basicinput" name="login" placeholder="Login"></div>
                     
-                    <input type="password" class="basicinput" name="mdp" placeholder="Mot de passe">
+                    <div><?php if (isset($err_mdp)) { echo $err_mdp} ;?></div>
+                    <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe"></div>
 
-                    <input type="password" class="basicinput" name="confirmmdp" placeholder="Confirmez votre mot de passe">
+                    <div><?php if (isset($err_confirmmmdp)) { echo $err_confirmmdp} ;?></div>
+                    <div><input type="password" class="basicinput" name="confirmmdp" placeholder="Confirmez votre mot de passe"></div>
 
-                    <input type="submit" class="submitinput" name="inscription" value="S'inscrire"><br>
+                    <div><?php if (isset($err_confirm)) { echo $err_confirm} ;?></div>
+                    <div><input type="submit" class="submitinput" name="inscription" value="S'inscrire"><br></div>
 
                 </form>
 
