@@ -1,6 +1,58 @@
 <?php
 
-    session_start()
+    session_start();
+
+    require('connexiondb.php'); // CONNEXION A LA BDD 
+
+    if(!empty($_POST)) {
+        extract($_POST);
+        $valid=(boolean)true;  // VALID POUR ENCLENCHER REQUETE
+
+        $login = $_POST['login']; 
+        $mdp = $_POST['mdp'];
+
+        // VERIF LOGIN ---- 
+
+        if (empty($login)) {
+
+            $err_login = "Veuillez renseigner votre login.";
+            $valid = false;
+            
+        }
+
+        // VERIF MDP ---- 
+
+        if (empty($mdp)) {
+
+            $err_mdp = "Veuillez renseigner votre mot de passe.";
+            $valid = false;
+        }
+
+        // SI LES DEUX CHAMPS SONT REMPLIS --> VERIF MDP ET PASSWORD DANS BDD
+
+        if ($valid) {
+
+            $connect = mysqli_query($mysqli, "SELECT * FROM utilisateurs WHERE login ='".$login."'  && password = '".md5($mdp)."'");
+
+            $testconnect = mysqli_num_rows($connect);
+
+            if ( $testconnect == 1 ) {
+
+                $_SESSION['login'] = "$login" ;
+                $connexionok ="Vous êtes connecté." ;
+            }
+
+            else {
+
+                $err_connexion = "Le login et/ou le mot de passe est incorrect.";
+
+            }
+
+        }
+
+
+
+    }
 
 ?>
 
@@ -29,6 +81,8 @@
 
                 <!-- FORMULAIRE DE CONNEXION -->
 
+                <div><?php if (isset($connexionok)) { echo $connexionok ;} ?></div>
+
                 <form action="connexion.php" method="post">
 
                     <div><?php if (isset($err_login)) { echo $err_login ;} ?></div>
@@ -38,7 +92,7 @@
                     <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe"></div>
 
                     <div><?php if (isset($err_connexion)) { echo $err_connexion ;} ?></div>
-                    <div><input type="submit" class="submitinput" name="connexion" value="Connexion><br></div>
+                    <div><input type="submit" class="submitinput" name="connexion" value="Connexion"><br></div>
 
                 </form>
 
