@@ -75,7 +75,7 @@
             elseif(isset($mdp) && isset($confirmmdp)) {                                                 // TESTS SI MDP ET CONFIRM MDP PAREILS
 
                 if ($mdp != $confirmmdp) {
-                    
+
                     $err_confirm ="Les mots de passe ne correspondent pas.";
                     $valid = false;
 
@@ -134,7 +134,7 @@
 
                 <!-- FORMULAIRE DINSCRIPTION -->
 
-                <form action="inscription.php" method="post">
+                <form action="inscription.php" method="post" class="styleform">
 
                     <div><?php if (isset($err_login)) { echo $err_login ;} ?></div>
                     <div><input type="text" class="basicinput" name="login" placeholder="Login"></div>
