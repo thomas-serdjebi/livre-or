@@ -42,7 +42,6 @@
 
             if ($resultlogin == 1) {                                                                                         
 
-                echo "Ce login est déjà utilisé.";
                 $err_login = "Ce login est déjà utilisé.";
                 $valid = false;
 
@@ -52,7 +51,6 @@
 
             if(empty($mdp)) {                                                                //  MDP TEST SI VIDE
 
-                echo "Veuillez renseigner votre mot de passe";
                 $err_password = "Veuillez renseigner votre mot de passe";
                 $valid=false;
             }
@@ -61,8 +59,6 @@
             //                                                  MDP : test ENTRE 8 ET 20 CARACTERES au moins 1 majuscule/miniscule/chiffres/caracspec
 
             elseif(!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$mdp)) {
-
-                echo "Le mot de passe ne respecte pas les conditions";
                 $err_mdp = "Le mot de passe ne respecte pas les condtions.";
                 $valid = false;
 
@@ -71,7 +67,6 @@
 
             if(empty($confirmmdp)) {                                                               // TEST CONFIRM MDP si vide
 
-                echo "Veuillez confirmer votre mot de passe";
                 $err_confirmmdp = "Veuillez confirmer votre mot de passe";
                 $valid = false;
 
@@ -80,8 +75,7 @@
             elseif(isset($mdp) && isset($confirmmdp)) {                                                 // TESTS SI MDP ET CONFIRM MDP PAREILS
 
                 if ($mdp != $confirmmdp) {
-
-                    echo "Les mots de passes ne correspondent pas.";
+                    
                     $err_confirm ="Les mots de passe ne correspondent pas.";
                     $valid = false;
 
@@ -142,16 +136,16 @@
 
                 <form action="inscription.php" method="post">
 
-                    <div><?php if (isset($err_login)) { echo $err_login} ;?></div>
+                    <div><?php if (isset($err_login)) { echo $err_login ;} ?></div>
                     <div><input type="text" class="basicinput" name="login" placeholder="Login"></div>
                     
-                    <div><?php if (isset($err_mdp)) { echo $err_mdp} ;?></div>
+                    <div><?php if (isset($err_mdp)) { echo $err_mdp ;} ?></div>
                     <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe"></div>
 
-                    <div><?php if (isset($err_confirmmmdp)) { echo $err_confirmmdp} ;?></div>
+                    <div><?php if (isset($err_confirmmmdp)) { echo $err_confirmmdp ;} ?></div>
                     <div><input type="password" class="basicinput" name="confirmmdp" placeholder="Confirmez votre mot de passe"></div>
 
-                    <div><?php if (isset($err_confirm)) { echo $err_confirm} ;?></div>
+                    <div><?php if (isset($err_confirm)) { echo $err_confirm ;} ?></div>
                     <div><input type="submit" class="submitinput" name="inscription" value="S'inscrire"><br></div>
 
                 </form>
