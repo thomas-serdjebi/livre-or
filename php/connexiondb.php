@@ -17,5 +17,9 @@ if (!$mysqli) {
 }
 
 
+elseif ($mysqli) {
+
+    echo "La connexion a réussi";
+}
 
 ?>
