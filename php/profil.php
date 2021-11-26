@@ -116,11 +116,31 @@
 
         // VARIABLES DU POST
 
+        $actualmdp = md5($_POST['actualmdp']);
         $newmdp = md5($_POST['newmdp']) ;
-        $confirmmdp = md5($_POST['confirmlogin']) ;
+        $confirmmdp = md5($_POST['confirmmdp']) ;
 
 
         //-------------------------------------------------VERIF DES ERREURS DU NEW MDP
+
+        if(empty($actualdmp)) {
+            echo "Veuillez renseigner votre mot de passe actuel.";
+            $err_actualmdp = "Veuillez renseigner votre mot de passe actuel.";
+        }
+
+        $sql = "SELECT count(*) FROM utilisateurs WHERE password = '$actualmdp' && login = '".$_SESSION['login']."'"; // REQUETE VERIF ACTUAL MDP
+
+        $testmdp = mysqli_query($mysqli, $sql);
+
+        $resultmdp = mysqli_num_rows($testmdp);
+
+        if ($resultmdp == 0) {                                                                                            // SI PAS DE RESULTAT => VALID FAUX
+            echo "Le mot de passe actuel est incorrect";
+            $err_actualmdp = "Le mot de passe actuel est incorrect";
+            $validmdp = false;
+        }
+
+
         
         if(empty($newmdp)) {                                                              // VERIF SI NEW MDP REMPLI
             echo "Veuillez renseigner votre nouveau mot de passe.";
@@ -130,11 +150,12 @@
 
         //                                                                                 // test ENTRE 8 ET 20 CARACTERES au moins 1 majuscule/miniscule/chiffres/caracspec
 
-        elseif(!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$mdp)) {
+        elseif(!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$newmdp)) {
             $err_mdp = "Le nouveau mot de passe ne respecte pas les condtions.";
             $validmdp = false;
 
         }
+        
 
 
         if(empty($confirmmdp)) {                                                               // TEST CONFIRM MDP si vide
@@ -214,8 +235,8 @@
                         </form>
                         <?php if ($openlogin == 1) { ?>
                             <form action ='profil.php' method='post' class='styleform'> 
-                                <div><input type='text' name='newlogin' placeholder='nouveau login'></div>
-                                <div><input type='text' name='confirmlogin' placeholder='confirmez le nouveau login'></div><br>
+                                <div><input type='text' name='newlogin' placeholder='Nouveau login'></div>
+                                <div><input type='text' name='confirmlogin' placeholder='Confirmez le nouveau login'></div><br>
                                 <div><input type='submit' name='modiflogin' value='Modifier'></div>
                             </form>
                         <?php ;}?>
@@ -232,9 +253,10 @@
                             <div><input type="submit" name="mdpform" value="Modifier le mot de passe" class="openbutton"></div>
                         </form>
                         <?php if ($openmdp == 1) { ?>
-                            <form action ='profil.php' method='post' class='styleform'> 
-                                <div><input type='password' name='newmdp' placeholder='nouveau mot de passe'></div>
-                                <div><input type='password' name='confirmmdp' placeholder='confirmez le nouveau mot de passe'></div><br>
+                            <form action ='profil.php' method='post' class='styleform'>
+                                <div><input type='password' name='actualmdp' placeholder='Mot de passe actuel'></div>
+                                <div><input type='password' name='newmdp' placeholder='Nouveau mot de passe'></div>
+                                <div><input type='password' name='confirmmdp' placeholder='Confirmez le nouveau mot de passe'></div><br>
                                 <div><input type='submit' name='modifmdp' value='Modifier'></div>
                             </form>
                         <?php ;}?>
