@@ -47,10 +47,7 @@
                 $err_connexion = "Le login et/ou le mot de passe est incorrect.";
 
             }
-
         }
-
-
 
     }
 
