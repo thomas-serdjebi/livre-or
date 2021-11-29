@@ -36,10 +36,13 @@
 
                 $id_utilisateur = $resultid['id'] ;
 
-                $DateAndTime = date('Y-m-d h:i:s', time());
+                
 
                 // REQUETE DAJOUT DU COMMENTAIRE
-                $sqlcom = mysqli_query($mysqli, "INSERT INTO commentaires(commentaire,id_utilisateur,date) VALUES ('$commentaire','$id_utilisateur','$DateAndTime')");
+
+                $sqlcom = mysqli_query($mysqli, "INSERT INTO commentaires(commentaire,id_utilisateur,date) VALUES ('$commentaire','$id_utilisateur',now()");
+
+
     
             }
         }
