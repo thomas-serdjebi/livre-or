@@ -14,10 +14,38 @@
 
     } 
 
-    // else { echo $_SESSION ['login']; 
+    else { echo $_SESSION ['login'];
+        
+        if ( isset($_POST['commenter'])) {
 
+            $commentaire = $_POST['commentaire'];                                                           // VERIF SI CHAMP VIDE 
 
+            if (empty($commentaire)) {
+
+                echo "Veuillez saisir votre commentaire";
+                $err_com = "Veuillez saisir votre commentaire";
+            }
+
+            else {
+
+                // REQUETE RECUPERATION ID UTILISATEUR
+
+                $sqlid = mysqli_query($mysqli, "SELECT id FROM utilisateurs WHERE login = '".$_SESSION['login']."'");
+
+                $resultid = mysqli_fetch_assoc($sqlid);
+
+                $id_utilisateur = $resultid['id'] ;
+
+                $DateAndTime = date('Y-m-d h:i:s', time());
+
+                // REQUETE DAJOUT DU COMMENTAIRE
+                $sqlcom = mysqli_query($mysqli, "INSERT INTO commentaires(commentaire,id_utilisateur,date) VALUES ('$commentaire','$id_utilisateur','$DateAndTime')");
     
+            }
+        }
+
+    }
+
 
 
 ?>
