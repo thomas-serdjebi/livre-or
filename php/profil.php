@@ -14,189 +14,197 @@
 
     } 
 
-    else { echo $_SESSION ['login'];}
+    else { echo $_SESSION ['login'];
 
-    require ('connexiondb.php'); // CONNEXION A LA BDD
-
-
-    // PARTIE LOGIN ----------------------------------------------------------------------------------------------------
-
-    $validlogin = (boolean) true ;                                                          // SI TRUE = PAS DERREUR ALORS LANCE LA REQUETE
-    $openlogin = 0 ;                                                                        // FORMULAIRE CACHE PAR DEFAUT
-
-    if (isset($_POST['loginform'])) {                                                       // AFFICHAGE DU FORMULAIRE DU Login
-
-        $openlogin = 1 ;  
-    }    
-
-    if (isset($_POST['modiflogin'])) {
-
-        $openlogin = 1 ;                                                                    // GARDE LE FORMULAIRE OUVERT SI ERREURS
-
-        // VARIABLES DU POST
-
-        $newlogin = $_POST['newlogin'] ;
-        $confirmlogin = $_POST['confirmlogin'] ;
+        require ('connexiondb.php'); // CONNEXION A LA BDD
 
 
-        //-------------------------------------------------VERIF DES ERREURS DU NEW LOGIN
-        
-        if(empty($newlogin)) {                                                              // VERIF SI NEW LOGIN REMPLI
-            echo "Veuillez renseigner votre nouveau login.";
-            $err_newlogin = "Veuillez renseigner votre nouveau login.";
-            $validlogin = false;
-        }
+        // PARTIE LOGIN ----------------------------------------------------------------------------------------------------
 
-        elseif (!preg_match("#^[a-z0-9]+$#" ,$newlogin)) {                                  // NEWLOGIN : SANS MAJ, SANS SPEC, MIN ET CHIFFRES OK
+        $validlogin = (boolean) true ;                                                          // SI TRUE = PAS DERREUR ALORS LANCE LA REQUETE
+        $openlogin = 0 ;                                                                        // FORMULAIRE CACHE PAR DEFAUT
 
-            echo "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux." ;
-            $err_login = "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux." ;
-            $valid = false;
+        if (isset($_POST['loginform'])) {                                                       // AFFICHAGE DU FORMULAIRE DU Login
 
-        }        
-        
-        elseif(strlen($newlogin)>25) {                                                      // NEWLOGIN : MAXIMUM 25 CARACTERES                         
-            echo "Le login ne doit pas dépasser 25 caractères." ;          
-            $err_login= "Le login est trop long, il dépasse 25 caractères.";
-            $valid= false;
-        }
+            $openlogin = 1 ;  
+        }    
 
-        elseif ($newlogin == $_SESSION['login']) {                                          // VERIF SI CEST DEJA LE LOGIN UTILISE 
-            echo "Vous utilisez déjà ce login.";
-            $err_newlogin = "Vous utilisez déjà ce login";
-            $validlogin=false;
-        }
+        if (isset($_POST['modiflogin'])) {
 
-        if(empty($confirmlogin)) {                                                          // VERIF SI CONFIRM LOGIN REMPLI
-            echo "Veuillez confirmer votre nouveau login";
-            $err_confirmlogin = " Veuillez confirmer votre nouveau login";
-            $validlogin=false;
-        }
+            $openlogin = 1 ;                                                                    // GARDE LE FORMULAIRE OUVERT SI ERREURS
 
-        elseif($newlogin != $confirmlogin) {                                                // VERIF SI NEW LOGIN ET CONFIRM LOGIN CORRESPONDENT
-            echo "Les nouveaux logins ne correspondent pas.";
-            $err_2logins = "Les nouveaux logins ne correspondent pas." ;
-            $validlogin = false;
-        }
+            // VARIABLES DU POST
 
-        //------------------------------------------- REQUETE MODIF LOGIN SI PAS DERREURS
+            $newlogin = $_POST['newlogin'] ;
+            $confirmlogin = $_POST['confirmlogin'] ;
 
-        if($validlogin==true) {
 
-            $requestlogin = "UPDATE utilisateurs SET login= '$newlogin' WHERE login = '".$_SESSION['login']."'" ;
-
-            if(mysqli_query($mysqli, $requestlogin)) {
-                echo "Le login a bien été modifié." ;
-                $newloginok = "Le nouveau login a bien été enregistré.";
-                $openlogin = 0;                                                             // FERME LE FORMULAIRE LOGIN SI MODIF OK
+            //-------------------------------------------------VERIF DES ERREURS DU NEW LOGIN
+            
+            if(empty($newlogin)) {                                                              // VERIF SI NEW LOGIN REMPLI
+                echo "Veuillez renseigner votre nouveau login.";
+                $err_newlogin = "Veuillez renseigner votre nouveau login.";
+                $validlogin = false;
             }
 
-            else {
-                echo "Le login n'a pas pu être modifié." ;                                  // AFFICHE LERREUR SI BUG
-                $err_modiflogin = "Le login n'a pas pu être modifié." ;
+            elseif (!preg_match("#^[a-z0-9]+$#" ,$newlogin)) {                                  // NEWLOGIN : SANS MAJ, SANS SPEC, MIN ET CHIFFRES OK
+
+                echo "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux." ;
+                $err_login = "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux." ;
+                $valid = false;
+
+            }        
+            
+            elseif(strlen($newlogin)>25) {                                                      // NEWLOGIN : MAXIMUM 25 CARACTERES                         
+                echo "Le login ne doit pas dépasser 25 caractères." ;          
+                $err_login= "Le login est trop long, il dépasse 25 caractères.";
+                $valid= false;
             }
-        }
 
-    }   
-    
-    // MODIFICATION DU MDP ---------------------------------------------------------------------------------------------------------------
+            elseif ($newlogin == $_SESSION['login']) {                                          // VERIF SI CEST DEJA LE LOGIN UTILISE 
+                echo "Vous utilisez déjà ce login.";
+                $err_newlogin = "Vous utilisez déjà ce login";
+                $validlogin=false;
+            }
 
+            if(empty($confirmlogin)) {                                                          // VERIF SI CONFIRM LOGIN REMPLI
+                echo "Veuillez confirmer votre nouveau login";
+                $err_confirmlogin = " Veuillez confirmer votre nouveau login";
+                $validlogin=false;
+            }
 
-    $validmdp = (boolean) true ;                                                          // SI TRUE = PAS DERREUR ALORS LANCE LA REQUETE
-    $openmdp = 0 ;                                                                        // FORMULAIRE CACHE PAR DEFAUT
+            elseif($newlogin != $confirmlogin) {                                                // VERIF SI NEW LOGIN ET CONFIRM LOGIN CORRESPONDENT
+                echo "Les nouveaux logins ne correspondent pas.";
+                $err_2logins = "Les nouveaux logins ne correspondent pas." ;
+                $validlogin = false;
+            }
 
-    if (isset($_POST['mdpform'])) {                                                       // AFFICHAGE DU FORMULAIRE DU Login
+            //------------------------------------------- REQUETE MODIF LOGIN SI PAS DERREURS
 
-        $openmdp = 1 ;  
-    }    
+            if($validlogin==true) {
 
-    if (isset($_POST['modifmdp'])) {
+                $requestlogin = "UPDATE utilisateurs SET login= '$newlogin' WHERE login = '".$_SESSION['login']."'" ;
 
-        $openmdp = 1 ;                                                                    // GARDE LE FORMULAIRE OUVERT SI ERREURS
+                if(mysqli_query($mysqli, $requestlogin)) {
+                    echo "Le login a bien été modifié." ;
+                    $newloginok = "Le nouveau login a bien été enregistré.";
+                    $openlogin = 0;                                                             // FERME LE FORMULAIRE LOGIN SI MODIF OK
+                }
 
-        // VARIABLES DU POST
+                else {
+                    echo "Le login n'a pas pu être modifié." ;                                  // AFFICHE LERREUR SI BUG
+                    $err_modiflogin = "Le login n'a pas pu être modifié." ;
+                }
+            }
 
-        $actualmdp = md5($_POST['actualmdp']);
-        $newmdp = md5($_POST['newmdp']) ;
-        $confirmmdp = md5($_POST['confirmmdp']) ;
-
-
-        //-------------------------------------------------VERIF DES ERREURS DU NEW MDP
-
-        if(empty($actualdmp)) {
-            echo "Veuillez renseigner votre mot de passe actuel.";
-            $err_actualmdp = "Veuillez renseigner votre mot de passe actuel.";
-        }
-
-        $sql = "SELECT count(*) FROM utilisateurs WHERE password = '$actualmdp' && login = '".$_SESSION['login']."'"; // REQUETE VERIF ACTUAL MDP
-
-        $testmdp = mysqli_query($mysqli, $sql);
-
-        $resultmdp = mysqli_num_rows($testmdp);
-
-        if ($resultmdp == 0) {                                                                                            // SI PAS DE RESULTAT => VALID FAUX
-            echo "Le mot de passe actuel est incorrect";
-            $err_actualmdp = "Le mot de passe actuel est incorrect";
-            $validmdp = false;
-        }
-
-
+        }   
         
-        if(empty($newmdp)) {                                                              // VERIF SI NEW MDP REMPLI
-            echo "Veuillez renseigner votre nouveau mot de passe.";
-            $err_newmdp = "Veuillez renseigner votre nouveau mot de passe.";
-            $validmdp = false;
-        }
-
-        //                                                                                 // test ENTRE 8 ET 20 CARACTERES au moins 1 majuscule/miniscule/chiffres/caracspec
-
-        elseif(!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$newmdp)) {
-            $err_mdp = "Le nouveau mot de passe ne respecte pas les condtions.";
-            $validmdp = false;
-
-        }
-        
+        // PARTIE MDP  ---------------------------------------------------------------------------------------------------------------
 
 
-        if(empty($confirmmdp)) {                                                               // TEST CONFIRM MDP si vide
+        $validmdp = (boolean) true ;                                                          // SI TRUE = PAS DERREUR ALORS LANCE LA REQUETE
+        $openmdp = 0 ;                                                                        // FORMULAIRE CACHE PAR DEFAUT
 
-            $err_confirmmdp = "Veuillez confirmer votre mot de passe";
-            $validmdp = false;
+        if (isset($_POST['mdpform'])) {                                                       // AFFICHAGE DU FORMULAIRE DU Login
 
-        }
+            $openmdp = 1 ;  
+        }    
 
-        elseif(isset($mdp) && isset($confirmmdp)) {                                                 // TESTS SI MDP ET CONFIRM MDP PAREILS
+        if (isset($_POST['modifmdp'])) {
 
-            if ($mdp != $confirmmdp) {
+            echo "POST RECU";
 
-                $err_confirm ="Les mots de passe ne correspondent pas.";
+            $openmdp = 1 ;                                                                    // GARDE LE FORMULAIRE OUVERT SI ERREURS
+
+            // VARIABLES DU POST
+
+            $actualmdp = ($_POST['actualmdp']);
+            $newmdp = ($_POST['newmdp']) ;
+            $confirmmdp = ($_POST['confirmmdp']) ;
+
+            echo $actualmdp;
+
+
+            //-------------------------------------------------VERIF DES ERREURS MDP
+
+            $sql = "SELECT * FROM utilisateurs WHERE password = '".md5($actualmdp)."' && login = '".$_SESSION['login']."'"; // REQUETE VERIF ACTUAL MDP
+
+            $testmdp = mysqli_query($mysqli, $sql);
+
+            $resultmdp = mysqli_num_rows($testmdp);
+
+            if(empty($actualmdp)) {                                                                                     //VERIF SI ACTUEL MDP REMPLI
+                echo "Veuillez renseigner votre mot de passe actuel.";
+                $err_actualmdp = "Veuillez renseigner votre mot de passe actuel.";
+                $validmdp = false;
+            }
+
+
+
+            elseif ($resultmdp == 0) {                                                                                            // SI PAS DE RESULTAT => VALID FAUX
+                echo "Le mot de passe actuel est incorrect.";
+                $err_actualmdp = "Le mot de passe actuel est incorrect.";
+                $validmdp = false;
+            }
+
+
+            
+            if(empty($newmdp)) {                                                              // VERIF SI NEW MDP REMPLI
+                echo "Veuillez renseigner votre nouveau mot de passe.";
+                $err_newmdp = "Veuillez renseigner votre nouveau mot de passe.";
+                $validmdp = false;
+            }
+
+            //                                                                                 // test ENTRE 8 ET 20 CARACTERES au moins 1 majuscule/miniscule/chiffres/caracspec
+
+            elseif(!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/', $newmdp)) {
+                $err_newmdp = "Le nouveau mot de passe ne respecte pas les condtions.";
+                $validmdp = false;
+                echo "Le nouveau mot de passe ne respecte pas les conditions.";
+
+            }
+
+            elseif(empty($confirmmdp)) {                                                               // TEST CONFIRM MDP si vide
+
+                echo " Veuillez confirmer votre mot de passe.";
+                $err_confirmmdp = "Veuillez confirmer votre mot de passe";
                 $validmdp = false;
 
             }
+            
+
+            elseif($newmdp != $confirmmdp) {     
+                // TESTS SI MDP ET CONFIRM MDP PAREILS
+
+                echo "Les mots de passe ne correspondent pas.";
+                $err_confirm ="Les mots de passe ne correspondent pas.";
+                $validmdp = false;
 
 
-        }
 
-
-
-        //------------------------------------------- REQUETE MODIF MDP SI PAS DERREURS
-
-        if($validmdp==true) {
-
-            $requestmdp = "UPDATE utilisateurs SET password= '$newmdp' WHERE login = '".$_SESSION['login']."'" ;
-
-            if(mysqli_query($mysqli, $requestmdp)) {
-                echo "Le login a bien été modifié." ;
-                $newloginok = "Le nouveau login a bien été enregistré.";
-                $openlogin = 0;                                                             // FERME LE FORMULAIRE LOGIN SI MODIF OK
             }
 
-            else {
-                echo "Le login n'a pas pu être modifié." ;                                  // AFFICHE LERREUR SI BUG
-                $err_modifmdp = "Le login n'a pas pu être modifié." ;
-            }
-        }
 
+
+            //------------------------------------------- REQUETE MODIF MDP SI PAS DERREURS
+
+            if($validmdp) {
+
+                $requestmdp = "UPDATE utilisateurs SET password= '".md5($newmdp)."' WHERE login = '".$_SESSION['login']."'" ;
+
+                if(mysqli_query($mysqli, $requestmdp)) {
+                    echo "Le mot de passe a bien été modifié." ;
+                    
+                    $openmdp = 0;                                                             // FERME LE FORMULAIRE MDP SI MODIF OK
+                }
+
+                else {
+                    echo "Le mot de passe n'a pas pu être modifié." ;                                  // AFFICHE LERREUR SI BUG
+                    $err_modifmdp = "Le login n'a pas pu être modifié." ;
+                }
+            }
+
+        }
     }   
 
     
@@ -208,7 +216,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Connexion</title>
+        <title>Profil</title>
         <!-- LINK LE CSS A FAIRE  -->
 
     </head>
