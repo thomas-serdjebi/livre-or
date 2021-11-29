@@ -25,8 +25,7 @@
             
         </main>
 
-        <!-- AJOUTER LE FOOTER REQUIRE -->
-
+        <?php require('footer.php') ; ?>
 
 
 
