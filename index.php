@@ -25,7 +25,7 @@
 
         <main>
 
-            <h1 class="animtitle">Bienvenue chez UrBar, ton Bar.</h1>
+            <h1 class="animtitle">Bienvenue chez UrBar,</br>ton Bar.</h1>
 
             <section>
 
@@ -36,7 +36,7 @@
                 <p> Consulte notre <a href="livre-or.php" target="_blank" class="mainliens">Livre d'or</a> pour te faire une idée ! </p>
 
                 <p>Alors, tu souhaites devenir membre et bénéficier d'un accès privilégié au UrBar ?</br>
-                    Inscris toi ci dessous !
+                    <br>Inscris toi ci dessous !
                 </p>   
 
                 <form action="inscription.php" method="get">
@@ -69,7 +69,7 @@
  
 
 
-  <
+  
 
 </html>
 

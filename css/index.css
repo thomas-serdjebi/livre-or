@@ -1,9 +1,60 @@
 main {
     background-image: url('../assets/indexbackg.jpeg');
-    background-attachment: fixed;
     background-size:cover;
+    background-repeat: no-repeat;
     margin-top:-22px;
     color: white;
+    padding-top:30px;
+    padding-left:7%;
+    padding-bottom:140px;
+
+   
+}
+
+h1 {
+    font-family: Oleo Script Swash Caps;
+    font-size: 65px;
+    margin-bottom:20px;
+}
+
+.intro {
+    font-family: Lobster;
+    font-size:24px;
+    margin-bottom:20px;
+   
     
 }
 
+p {
+    font-family: Abril Fatface;
+    font-size:18px;
+}
+
+.submitbtn {
+    background-color:orange;
+    border: 1px solid orange;
+    padding:4px;
+    color:black;
+    transition: all 0.5s ease;
+    border-radius:10px;
+    height: 50px;
+    width:140px;
+    font-family: Abril Fatface;
+    font-weight: 500;
+    font-size:20px;
+
+} 
+
+.submitbtn:hover{
+    background-color:black;
+    color: orange;
+
+
+} 
+
+
+.mainliens {
+    text-decoration: none;
+    color: orange;
+    font-size:20px;
+}
