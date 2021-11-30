@@ -1,0 +1,62 @@
+
+.submitbtn {
+    background-color:orange;
+    border: 1px solid orange;
+    padding:4px;
+    color:black;
+    transition: all 0.5s ease;
+    border-radius:10px;
+    height: 50px;
+    width:140px;
+    font-family: Abril Fatface;
+    font-weight: 500;
+    font-size:20px;
+
+} 
+
+.submitbtn:hover{
+    background-color:black;
+    color: orange;
+
+
+} 
+
+
+.mainliens {
+    text-decoration: none;
+    color: orange;
+    font-size:20px;
+}
+
+.styleform {
+    margin-bottom:5%;
+
+    
+}
+
+.styleform input{
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+    margin:auto;
+    margin-top:5px;
+    margin-bottom:5px;
+    width:30%;
+    height:6%;
+   
+}
+
+.inputbasic {
+    border: 1px solid grey;
+    border-radius: 3px;
+    padding: 3px;
+    transition: all 0.5s ease ;
+    font-family:'Exo 2';
+    font-weight: 600;
+    font-size:18px;
+
+}
+
+.inputbasic:focus {
+    background-color:rgba(70, 227, 190);
+    

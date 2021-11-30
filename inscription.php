@@ -114,19 +114,31 @@
     <head>
         <meta charset="utf-8">
         <title>Inscription</title>
-        <!-- LINK LE CSS A FAIRE  -->
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/forms.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lobster&family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet">
+
+        
 
     </head>
 
     <body>
 
-        <!-- REQUIRE LE HEADER QUAND CREE -->
+        <?php require('header.php');?>
 
         <main>
 
+            <h1>Inscription</h1>
+
             <section> 
 
-                <!-- TEXTE AVANT FORMULAIRE -->
+                <p class=intro>
+
+                </p>
 
             </section>
 
@@ -146,7 +158,7 @@
                     <div><input type="password" class="basicinput" name="confirmmdp" placeholder="Confirmez votre mot de passe"></div>
 
                     <div><?php if (isset($err_confirm)) { echo $err_confirm ;} ?></div>
-                    <div><input type="submit" class="submitinput" name="inscription" value="S'inscrire"><br></div>
+                    <div><input type="submit" class="submitbtn" name="inscription" value="S'inscrire"><br></div>
 
                 </form>
 
@@ -156,7 +168,7 @@
 
                 <!-- BOUTON LIEN VERS PAGE CONNEXION -->
 
-                <div><a href="connexion.php"><input type="button" class="linkbutton" value="Connexion"></a></div>
+                <div><a href="connexion.php"><input type="button" class="submitbtn" value="Connexion"></a></div>
 
                 
 
@@ -164,7 +176,7 @@
             
         </main>
 
-        <!-- AJOUTER LE FOOTER REQUIRE -->
+        <?php require('footer.php');?>
 
 
 
@@ -173,12 +185,6 @@
 
 
 
-
-
- 
-
-
-  <
 
 </html>
 
