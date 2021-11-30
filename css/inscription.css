@@ -1,17 +1,24 @@
 main {
-    background-image: url('../assets/indexbackg.jpeg');
+    background-image: url('../assets/inscriptionbackg.jpg');
     background-size:cover;
     background-repeat: no-repeat;
-    margin-top:-22px;
     color: white;
-    padding-top:30px;
+    padding-top:0px;
     padding-left:7%;
-    padding-bottom:180px;
+    padding-bottom:100px;
+    
 
    
 }
 
-h1 {
+.content {
+    display:flex;
+    flex-direction:column;
+    text-align:left;
+    padding-left:60%;
+}
+
+.titre {
     font-family: Oleo Script Swash Caps;
     font-size: 65px;
     margin-bottom:20px;
@@ -29,3 +36,5 @@ p {
     font-family: Abril Fatface;
     font-size:18px;
 }
+
+

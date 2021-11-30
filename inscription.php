@@ -114,7 +114,7 @@
     <head>
         <meta charset="utf-8">
         <title>Inscription</title>
-        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/inscription.css">
         <link rel="stylesheet" href="css/header.css">
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/forms.css">
@@ -132,45 +132,53 @@
 
         <main>
 
-            <h1>Inscription</h1>
+            
 
-            <section> 
-
-                <p class=intro>
-
-                </p>
-
-            </section>
-
-            <section>
-
-                <!-- FORMULAIRE DINSCRIPTION -->
-
-                <form action="inscription.php" method="post" class="styleform">
-
-                    <div><?php if (isset($err_login)) { echo $err_login ;} ?></div>
-                    <div><input type="text" class="basicinput" name="login" placeholder="Login"></div>
-                    
-                    <div><?php if (isset($err_mdp)) { echo $err_mdp ;} ?></div>
-                    <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe"></div>
-
-                    <div><?php if (isset($err_confirmmmdp)) { echo $err_confirmmdp ;} ?></div>
-                    <div><input type="password" class="basicinput" name="confirmmdp" placeholder="Confirmez votre mot de passe"></div>
-
-                    <div><?php if (isset($err_confirm)) { echo $err_confirm ;} ?></div>
-                    <div><input type="submit" class="submitbtn" name="inscription" value="S'inscrire"><br></div>
-
-                </form>
-
-                <!-- DEJA INSCRIT ? CONNEXION -->
-
-                <div> Déjà inscrit ? Connectez vous ci-dessous ! </div>
-
-                <!-- BOUTON LIEN VERS PAGE CONNEXION -->
-
-                <div><a href="connexion.php"><input type="button" class="submitbtn" value="Connexion"></a></div>
-
+            <section class="content">
                 
+                <div><h1 class="titre">Inscription</h1></div>
+
+                <div> 
+
+                    <p class="intro">
+                        Envie de shaker (les cokctails) avec nous ?<br>
+                        Rempli le formulaire !
+
+                    </p>
+
+                </div>
+
+                <div class="formplace">
+
+                    <!-- FORMULAIRE DINSCRIPTION -->
+
+                    <form action="inscription.php" method="post" class="styleform">
+
+                        <div><?php if (isset($err_login)) { echo $err_login ;} ?></div>
+                        <div><input type="text" class="basicinput" name="login" placeholder="Login"></div>
+                        
+                        <div><?php if (isset($err_mdp)) { echo $err_mdp ;} ?></div>
+                        <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe"></div>
+
+                        <div><?php if (isset($err_confirmmmdp)) { echo $err_confirmmdp ;} ?></div>
+                        <div><input type="password" class="basicinput" name="confirmmdp" placeholder="Confirmez votre mot de passe"></div>
+
+                        <div><?php if (isset($err_confirm)) { echo $err_confirm ;} ?></div>
+                        <div><input type="submit" class="submitbtn" name="inscription" value="S'inscrire"><br></div>
+
+                    </form>
+
+                    <!-- DEJA INSCRIT ? CONNEXION -->
+
+                    <div class="intro"> Déjà inscrit ? Connectez vous ci-dessous ! </div>
+
+                    <!-- BOUTON LIEN VERS PAGE CONNEXION -->
+
+                    <div><a href="connexion.php"><input type="button" class="submitbtn" value="Connexion"></a></div>
+
+                    
+
+                </div>
 
             </section>
             
