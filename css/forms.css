@@ -87,4 +87,11 @@
 .inputbasic:focus {
     background-color:rgba(70, 227, 190);
 }
+
+.formerror {
+    color:red;
+    font-family:Abril Fatface;
+    font-size:18px;
+    margin:auto;
+}
     

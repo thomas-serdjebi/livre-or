@@ -154,16 +154,16 @@
 
                     <form action="inscription.php" method="post" class="styleform">
 
-                        <div><?php if (isset($err_login)) { echo $err_login ;} ?></div>
+                        <div class="formerror"><?php if (isset($err_login)) { echo $err_login ;} ?></div>
                         <div><input type="text" class="basicinput" name="login" placeholder="Login"></div>
                         
-                        <div><?php if (isset($err_mdp)) { echo $err_mdp ;} ?></div>
+                        <div class="formerror"><?php if (isset($err_mdp)) { echo $err_mdp ;} ?></div>
                         <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe"></div>
 
-                        <div><?php if (isset($err_confirmmmdp)) { echo $err_confirmmdp ;} ?></div>
+                        <div class="formerror"><?php if (isset($err_confirmmmdp)) { echo $err_confirmmdp ;} ?></div>
                         <div><input type="password" class="basicinput" name="confirmmdp" placeholder="Confirmez votre mot de passe"></div>
 
-                        <div><?php if (isset($err_confirm)) { echo $err_confirm ;} ?></div>
+                        <div class="formerror"><?php if (isset($err_confirm)) { echo $err_confirm ;} ?></div>
                         <div><input type="submit" class="submitbtn" name="inscription" value="S'inscrire"><br></div>
 
                     </form>
