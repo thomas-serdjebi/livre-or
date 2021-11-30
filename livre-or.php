@@ -9,6 +9,7 @@
 
     $result = mysqli_fetch_all($sql);
 
+
 ?>
 
 <html>
