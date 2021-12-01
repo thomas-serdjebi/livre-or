@@ -1,0 +1,60 @@
+main {
+    background-image: url('../assets/commentairebackg.jpg');
+    background-size:cover;
+    background-repeat: no-repeat;
+    color: white;
+    padding-top:0px;
+    padding-bottom:150px;
+    height:100vh;
+    margin-top:-60px;
+    
+
+   
+}
+
+
+.content {
+    text-align:right;
+    padding-right:15%;
+    position:relative;
+    top:10%;
+    justify-content: left;
+}
+
+.titre {
+    font-family: Oleo Script Swash Caps;
+    font-size: 65px;
+    margin-bottom:10px;
+}
+
+.intro {
+    font-family: Lobster;
+    font-size:26px;
+    margin-bottom:20px;
+   
+    
+}
+
+textarea {
+    height:200px;
+    width:600px;
+    border: orange 4px solid;
+    border-radius:5%;
+    font-family:Abril Fat face;
+    font-weight:600;
+    font-size:18px;
+}
+
+input[name='commenter'] {
+    position:relative;
+    left:89%;
+    border-radius:20%;
+    font-family:Abril Fat face;
+    font-weight:600;
+    
+}
+
+
+
+
+

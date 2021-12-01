@@ -9,12 +9,11 @@
    
 
     if (!isset($_SESSION['login'])) {                                                       // SI PAS DUTILISATEUR CONNECTE
-        echo "Erreur, vous n'êtes pas connecté.";
         $err_connexion = "Vous devez vous connecter pour accéder à cette page." ;
 
     } 
 
-    else { echo $_SESSION ['login'];
+    else { 
 
         require ('connexiondb.php'); // CONNEXION A LA BDD
 
@@ -42,7 +41,7 @@
             //-------------------------------------------------VERIF DES ERREURS DU NEW LOGIN
             
             if(empty($newlogin)) {                                                              // VERIF SI NEW LOGIN REMPLI
-                echo "Veuillez renseigner votre nouveau login.";
+
                 $err_newlogin = "Veuillez renseigner votre nouveau login.";
                 $validlogin = false;
             }
@@ -56,25 +55,25 @@
             }        
             
             elseif(strlen($newlogin)>25) {                                                      // NEWLOGIN : MAXIMUM 25 CARACTERES                         
-                echo "Le login ne doit pas dépasser 25 caractères." ;          
+                          
                 $err_login= "Le login est trop long, il dépasse 25 caractères.";
                 $valid= false;
             }
 
             elseif ($newlogin == $_SESSION['login']) {                                          // VERIF SI CEST DEJA LE LOGIN UTILISE 
-                echo "Vous utilisez déjà ce login.";
+               
                 $err_newlogin = "Vous utilisez déjà ce login";
                 $validlogin=false;
             }
 
             if(empty($confirmlogin)) {                                                          // VERIF SI CONFIRM LOGIN REMPLI
-                echo "Veuillez confirmer votre nouveau login";
+               
                 $err_confirmlogin = " Veuillez confirmer votre nouveau login";
                 $validlogin=false;
             }
 
             elseif($newlogin != $confirmlogin) {                                                // VERIF SI NEW LOGIN ET CONFIRM LOGIN CORRESPONDENT
-                echo "Les nouveaux logins ne correspondent pas.";
+                
                 $err_2logins = "Les nouveaux logins ne correspondent pas." ;
                 $validlogin = false;
             }
@@ -86,13 +85,12 @@
                 $requestlogin = "UPDATE utilisateurs SET login= '$newlogin' WHERE login = '".$_SESSION['login']."'" ;
 
                 if(mysqli_query($mysqli, $requestlogin)) {
-                    echo "Le login a bien été modifié." ;
+                  
                     $newloginok = "Le nouveau login a bien été enregistré.";
                     $openlogin = 0;                                                             // FERME LE FORMULAIRE LOGIN SI MODIF OK
                 }
 
-                else {
-                    echo "Le login n'a pas pu être modifié." ;                                  // AFFICHE LERREUR SI BUG
+                else {                                  // AFFICHE LERREUR SI BUG
                     $err_modiflogin = "Le login n'a pas pu être modifié." ;
                 }
             }
@@ -112,7 +110,6 @@
 
         if (isset($_POST['modifmdp'])) {
 
-            echo "POST RECU";
 
             $openmdp = 1 ;                                                                    // GARDE LE FORMULAIRE OUVERT SI ERREURS
 
@@ -122,7 +119,6 @@
             $newmdp = ($_POST['newmdp']) ;
             $confirmmdp = ($_POST['confirmmdp']) ;
 
-            echo $actualmdp;
 
 
             //-------------------------------------------------VERIF DES ERREURS MDP
@@ -134,7 +130,6 @@
             $resultmdp = mysqli_num_rows($testmdp);
 
             if(empty($actualmdp)) {                                                                                     //VERIF SI ACTUEL MDP REMPLI
-                echo "Veuillez renseigner votre mot de passe actuel.";
                 $err_actualmdp = "Veuillez renseigner votre mot de passe actuel.";
                 $validmdp = false;
             }
@@ -142,7 +137,6 @@
 
 
             elseif ($resultmdp == 0) {                                                                                            // SI PAS DE RESULTAT => VALID FAUX
-                echo "Le mot de passe actuel est incorrect.";
                 $err_actualmdp = "Le mot de passe actuel est incorrect.";
                 $validmdp = false;
             }
@@ -150,7 +144,6 @@
 
             
             if(empty($newmdp)) {                                                              // VERIF SI NEW MDP REMPLI
-                echo "Veuillez renseigner votre nouveau mot de passe.";
                 $err_newmdp = "Veuillez renseigner votre nouveau mot de passe.";
                 $validmdp = false;
             }
@@ -160,13 +153,11 @@
             elseif(!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/', $newmdp)) {
                 $err_newmdp = "Le nouveau mot de passe ne respecte pas les condtions.";
                 $validmdp = false;
-                echo "Le nouveau mot de passe ne respecte pas les conditions.";
 
             }
 
             elseif(empty($confirmmdp)) {                                                               // TEST CONFIRM MDP si vide
 
-                echo " Veuillez confirmer votre mot de passe.";
                 $err_confirmmdp = "Veuillez confirmer votre mot de passe";
                 $validmdp = false;
 
@@ -175,8 +166,6 @@
 
             elseif($newmdp != $confirmmdp) {     
                 // TESTS SI MDP ET CONFIRM MDP PAREILS
-
-                echo "Les mots de passe ne correspondent pas.";
                 $err_confirm ="Les mots de passe ne correspondent pas.";
                 $validmdp = false;
 
@@ -217,54 +206,65 @@
     <head>
         <meta charset="utf-8">
         <title>Profil</title>
-        <!-- LINK LE CSS A FAIRE  -->
+        <link rel="stylesheet" href="css/profil.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/forms.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lobster&family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet">
 
     </head>
 
     <body>
 
-        <!-- REQUIRE LE HEADER QUAND CREE -->
+        <?php require('header.php') ?>
 
         <main>
-            <section> 
+              
+            <section class="content">
 
-                <!-- TEXTE AVANT INFOS PROFIL -->
-
-            </section>
-
-            <section class="formsbox">
+                <h1 class="titre"><?php if(isset($_SESSION['login'])) echo $_SESSION['login'] ?></h1>
+                <p class="intro">Bienvenue sur ton profil UrBar</p>
 
                 <!-- FORMULAIRE DE MODIFICATION LOGIN -->
                 
                 <div class="boxmodif">
-                    <div>
+                    <div id="loginstyle">
                         <form action="profil.php" method="post" class="styleform">
-                            <div><input type="submit" name="loginform" value="Modifier le login" class="openbutton"></div>
+                            <div><input type="submit" name="loginform" value="Modifier le login" id="openlogin"></div>
                         </form>
                         <?php if ($openlogin == 1) { ?>
                             <form action ='profil.php' method='post' class='styleform'> 
+                                <div class="formerror"><?php if(isset($err_newlogin)) { echo $err_newlogin;} ?></div>
                                 <div><input type='text' name='newlogin' placeholder='Nouveau login'></div>
+                                <div class="formerror"><?php if(isset($err_confirmlogin)) { echo $err_confirmlogin;} ?></div>
                                 <div><input type='text' name='confirmlogin' placeholder='Confirmez le nouveau login'></div><br>
+                                <div class="formerror"><?php if(isset($err_modiflogin)) { echo $err_modiflogin;} ?></div>
                                 <div><input type='submit' name='modiflogin' value='Modifier'></div>
                             </form>
                         <?php ;}?>
                         <?php if (isset($newloginok)) { echo $newloginok ;} ?>
                         
                     </div>
-                </div>
+                
 
-                <!-- FORMULAIRE DE MODIFICATION MDP -->
+                    <!-- FORMULAIRE DE MODIFICATION MDP -->
 
-                <div class="boxmodif">
-                    <div>
+
+                    <div id="mdpstyle">
                         <form action="profil.php" method="post" class="styleform">
-                            <div><input type="submit" name="mdpform" value="Modifier le mot de passe" class="openbutton"></div>
+                            <div><input type="submit" name="mdpform" value="Modifier le mot de passe" id="openmdp"></div>
                         </form>
                         <?php if ($openmdp == 1) { ?>
-                            <form action ='profil.php' method='post' class='styleform'>
+                            <form action ='profil.php' method='post' class='styleform' id="passformstyle">
+                                <div class="formerror"><?php if(isset($err_actualmdp)) { echo $err_actualmdp;} ?></div>
                                 <div><input type='password' name='actualmdp' placeholder='Mot de passe actuel'></div>
+                                <div class="formerror"><?php if(isset($err_newmdp)) { echo $err_newmdp;} ?></div>
                                 <div><input type='password' name='newmdp' placeholder='Nouveau mot de passe'></div>
+                                <div class="formerror"><?php if(isset($err_confirmmdp)) { echo $err_confirmmdp;} ?></div>
                                 <div><input type='password' name='confirmmdp' placeholder='Confirmez le nouveau mot de passe'></div><br>
+                                <div class="formerror"><?php if(isset($err_modifmdp)) { echo $err_modifmdp;} ?></div>
                                 <div><input type='submit' name='modifmdp' value='Modifier'></div>
                             </form>
                         <?php ;}?>
@@ -279,7 +279,7 @@
 
         </main>
 
-        <!-- AJOUTER LE FOOTER REQUIRE -->
+        <?php require('footer.php') ?>
         
             
     </body>

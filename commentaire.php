@@ -14,7 +14,7 @@
 
     } 
 
-    else { echo $_SESSION ['login'];
+    else { 
         
         if ( isset($_POST['commenter'])) {
 
@@ -36,11 +36,18 @@
 
                 $id_utilisateur = $resultid['id'] ;
 
+                echo $id_utilisateur;
+
                 
 
                 // REQUETE DAJOUT DU COMMENTAIRE
 
-                $sqlcom = mysqli_query($mysqli, "INSERT INTO commentaires(commentaire,id_utilisateur,date) VALUES ('$commentaire','$id_utilisateur',now()");
+                $com = mysqli_query($mysqli, "INSERT INTO commentaires (commentaire, id_utilisateur, date) VALUES ('".$commentaire."','".$id_utilisateur."',now())");
+
+
+                
+
+                
 
 
     
@@ -58,29 +65,40 @@
     <head>
         <meta charset="utf-8">
         <title>Commentaire</title>
-        <!-- LINK LE CSS A FAIRE  -->
+        <link rel="stylesheet" href="css/commentaire.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/forms.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lobster&family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet">
+
 
     </head>
 
     <body>
 
-        <!-- REQUIRE LE HEADER QUAND CREE -->
+        <?php require('header.php')?>
 
         <main>
-            <section> 
+            <section class="content">
 
-                <!-- TEXTE AVANT INFOS PROFIL -->
+                
 
-            </section>
+                
+                <h1 class="titre"><?php if(isset($_SESSION['login'])) { echo $_SESSION['login'];}?>,</h1>
 
-            <section class="formsbox">
-
-                <!-- FORMULAIRE DE MODIFICATION LOGIN -->
+                <div>
+                    <p class="intro">N'hésite pas à partager de ton expérience chez UrBar !</br>
+                    Ecris et poste ton témoignage dans le formulaire ci-dessous !</br>
+                    Il sera publié dans notre livre d'or !
+                    </p>
+                </div>
                 
                 <div class="boxmodif">
                     <div>
                         <form action="commentaire.php" method="post" class="styleform">
-                            <div><textarea name='commentaire' rows='4' cols='55' placeholder='commentaire'></textarea></div>
+                            <div><textarea name='commentaire' rows='4' cols='55' placeholder='Commentaire'></textarea></div>
                             <div><input type='submit' name='commenter' value='Poster' ></div>
                         </form>  
                     </div>
@@ -92,7 +110,7 @@
 
         </main>
 
-        <!-- AJOUTER LE FOOTER REQUIRE -->
+        <?php require('footer.php')?>
         
             
     </body>
