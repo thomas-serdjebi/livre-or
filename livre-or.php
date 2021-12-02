@@ -15,14 +15,21 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Commentaire</title>
-        <!-- LINK LE CSS A FAIRE  -->
+        <title>Livre d'or</title>
+        <link rel="stylesheet" href="css/livre-or.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/forms.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lobster&family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet">
+
 
     </head>
 
     <body>
 
-        <!-- REQUIRE LE HEADER QUAND CREE -->
+        <?php require('header.php');?>
 
         <main>
             <section> 
@@ -53,7 +60,7 @@
 
         </main>
 
-        <!-- AJOUTER LE FOOTER REQUIRE -->
+        <?php require('footer.php');?>
         
             
     </body>

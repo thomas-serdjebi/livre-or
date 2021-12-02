@@ -1,6 +1,8 @@
 <!-- HEADER DE L'INDEX -->
 <?php
 
+
+
 ?>
 
 <script>
@@ -47,8 +49,17 @@ window.onclick = function(event) {
             <div class="dropdown" id="comptebtn">
                 <button onclick="myFunctioncompte()" class="dropbtn" id="compte"></button>
                 <div id="myDropdowncompte" class="dropdown-content">
-                    <a href="inscription.php">Inscription</a>
-                    <a href="connexion.php">Connexion</a>
+
+                    <?php if(!isset($_SESSION['login'])) { ?>
+                        <a href="inscription.php">Inscription</a>
+                        <a href="connexion.php">Connexion</a>
+                    <?php } ?>
+
+                    <?php if(isset($_SESSION['login'])) { ?>
+                        <a href="profil.php">Profil</a>
+                        <a href="deconnexion.php">Déconnexion</a>
+                    <?php } ?>
+
                 </div>
             </div>
         </div>
@@ -58,10 +69,26 @@ window.onclick = function(event) {
                 <button onclick="myFunctionlivre()" class="dropbtn" id="livre"></button>
                 <div id="myDropdownlivre" class="dropdown-content">
                     <a href="livre-or.php">Livre d'or</a>
-                    <a href="commentaire.php">Commentaire</a>
+                    <?php if (isset($_SESSION['login'])) { ?>
+                        <a href="commentaire.php">Commentaire</a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
+
+        <?php if(isset($_SESSION['login'])) { ?>
+
+        <div class="boxprofil">
+            
+            <p class="sessionlog"><?php echo $_SESSION['login'] ?><br>
+                Tu es bien connecté.<br><br>
+                <a href="deconnexion.php" class="lienlog">Déconnexion</a>
+            </p>
+
+        </div>
+
+        <?php ; } ?>
+
 
     </div>
 
