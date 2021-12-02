@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     require('connexiondb.php');
 
     $sql = mysqli_query($mysqli, 

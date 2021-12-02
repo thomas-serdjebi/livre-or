@@ -48,15 +48,14 @@
 
             elseif (!preg_match("#^[a-z0-9]+$#" ,$newlogin)) {                                  // NEWLOGIN : SANS MAJ, SANS SPEC, MIN ET CHIFFRES OK
 
-                echo "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux." ;
-                $err_login = "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux." ;
+                $err_newlogin = "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux ou accents." ;
                 $valid = false;
 
             }        
             
             elseif(strlen($newlogin)>25) {                                                      // NEWLOGIN : MAXIMUM 25 CARACTERES                         
                           
-                $err_login= "Le login est trop long, il dépasse 25 caractères.";
+                $err_newlogin= "Le login est trop long, il dépasse 25 caractères.";
                 $valid= false;
             }
 
@@ -87,7 +86,10 @@
                 if(mysqli_query($mysqli, $requestlogin)) {
                   
                     $newloginok = "Le nouveau login a bien été enregistré.";
-                    $openlogin = 0;                                                             // FERME LE FORMULAIRE LOGIN SI MODIF OK
+                    $openlogin = 0;                                          // FERME LE FORMULAIRE LOGIN SI MODIF OK
+                    $_SESSION['login'] = $newlogin;     
+                                                                   
+                    
                 }
 
                 else {                                  // AFFICHE LERREUR SI BUG
@@ -151,7 +153,7 @@
             //                                                                                 // test ENTRE 8 ET 20 CARACTERES au moins 1 majuscule/miniscule/chiffres/caracspec
 
             elseif(!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/', $newmdp)) {
-                $err_newmdp = "Le nouveau mot de passe ne respecte pas les condtions.";
+                $err_newmdp = "Le nouveau mot de passe ne respecte pas les condtions : entre 8 et 20 caractères, minium 1 majuscule/miniscule/caractère spécial.";
                 $validmdp = false;
 
             }
@@ -166,7 +168,7 @@
 
             elseif($newmdp != $confirmmdp) {     
                 // TESTS SI MDP ET CONFIRM MDP PAREILS
-                $err_confirm ="Les mots de passe ne correspondent pas.";
+                $err_confirmmdp ="Les mots de passe ne correspondent pas.";
                 $validmdp = false;
 
 
@@ -182,7 +184,7 @@
                 $requestmdp = "UPDATE utilisateurs SET password= '".md5($newmdp)."' WHERE login = '".$_SESSION['login']."'" ;
 
                 if(mysqli_query($mysqli, $requestmdp)) {
-                    echo "Le mot de passe a bien été modifié." ;
+                    $newmdpok = "Le mot de passe a bien été modifié";
                     
                     $openmdp = 0;                                                             // FERME LE FORMULAIRE MDP SI MODIF OK
                 }
@@ -240,11 +242,12 @@
                                 <div><input type='text' name='newlogin' placeholder='Nouveau login'></div>
                                 <div class="formerror"><?php if(isset($err_confirmlogin)) { echo $err_confirmlogin;} ?></div>
                                 <div><input type='text' name='confirmlogin' placeholder='Confirmez le nouveau login'></div><br>
+                                <div class="formerror"><?php if(isset($err_2logins)) { echo $err_2logins;} ?></div>
                                 <div class="formerror"><?php if(isset($err_modiflogin)) { echo $err_modiflogin;} ?></div>
                                 <div><input type='submit' name='modiflogin' value='Modifier'></div>
                             </form>
                         <?php ;}?>
-                        <?php if (isset($newloginok)) { echo $newloginok ;} ?>
+                        <p class="intro"><?php if (isset($newloginok)) { echo $newloginok ;} ?></p>
                         
                     </div>
                 
@@ -268,7 +271,7 @@
                                 <div><input type='submit' name='modifmdp' value='Modifier'></div>
                             </form>
                         <?php ;}?>
-                        <?php if (isset($newmdpok)) { echo $newmdpnok ;} ?>
+                        <p class="intro"><?php if (isset($newmdpok)) { echo $newmdpok ;} ?></p>
                         
                     </div>
                 </div>

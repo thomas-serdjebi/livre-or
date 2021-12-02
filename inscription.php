@@ -29,7 +29,7 @@
 
             elseif (!preg_match("#^[a-z0-9]+$#" ,$login)) {                               // LOGIN : SANS MAJ, SANS SPEC, MIN ET CHIFFRES OK
 
-                echo "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux." ;
+                echo "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux ou accents." ;
                 $err_login = "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux." ;
                 $valid = false;
 
