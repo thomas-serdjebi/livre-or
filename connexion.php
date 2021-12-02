@@ -4,12 +4,17 @@
 
     require('connexiondb.php'); // CONNEXION A LA BDD 
 
+    $afficheform = 1 ;
+
+    
+
     if(!empty($_POST)) {
         extract($_POST);
         $valid=(boolean)true;  // VALID POUR ENCLENCHER REQUETE
 
         $login = $_POST['login']; 
         $mdp = $_POST['mdp'];
+        
 
         // VERIF LOGIN ---- 
 
@@ -39,7 +44,7 @@
             if ( $testconnect == 1 ) {
 
                 $_SESSION['login'] = "$login" ;
-                $connexionok ="Vous êtes connecté." ;
+                $afficheform = 0;
             }
 
             else {
@@ -81,28 +86,46 @@
 
                 <!-- FORMULAIRE DE CONNEXION -->
 
-                <div><?php if (isset($connexionok)) { echo $connexionok ;} ?></div>
+
+                <?php if ($afficheform == 1)  { ?>
 
                 <form action="connexion.php" method="post" class="styleform">
 
-                    <div class="formerror"><?php if (isset($err_login)) { echo $err_login ;} ?></div>
+                    <div class="formerror"><?php if (isset($err_login)) { echo $err_login ;} ?></div><br>
                     <div><input type="text" class="basicinput" name="login" placeholder="Login"></div>
                     
-                    <div class="formerror"><?php if (isset($err_mdp)) { echo $err_mdp ;} ?></div>
+                    <div class="formerror"><?php if (isset($err_mdp)) { echo $err_mdp ;} ?></div><br>
                     <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe"></div>
 
-                    <div class="formerror"><?php if (isset($err_connexion)) { echo $err_connexion ;} ?></div>
+                    <div class="formerror"><?php if (isset($err_connexion)) { echo $err_connexion ;} ?></div><br>
                     <div><input type="submit" class="submitbtn" id="connexion" name="connexion" value="Connexion"><br></div>
 
                 </form>
 
+
                 <!-- PAS ENCORE INSCRIT ? INSCRIPTION -->
 
-                <div class="intro"> Vous n'avez pas de compte ? Inscrivez-vous ci-dessous !</div>
+                <div class="intro"> Tu n'as pas de compte ? Inscris toi ci-dessous !</div>
 
                 <!-- BOUTON LIEN VERS PAGE INSCRIPTION -->
 
                 <div><a href="inscription.php"><input type="button" class="submitbtn" value="Inscription"></a></div>
+
+                <?php } ?>
+
+                <!-- SI CONNECTE ON FERME LE FORM ET BOUTON VERS PROFIL / commentaire -->
+
+                <?php if ($afficheform == 0 ) { ?>
+                
+                <p class="intro"> Tu es connecté ! </p><br>
+
+                <p class="intro"> N'hésite pas à modifier ton <a href="profil.php">profil</a>.<br>
+
+                <p class="intro"> Quand tu auras expérimenté UrBar, n'hésite pas à <a href="commentaire.php">partager</a> ton expérience dans le <a href="livre-or.php">Livre d'or</a><br>
+
+
+
+                <?php } ?>
 
                 
 

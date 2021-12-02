@@ -1,6 +1,7 @@
 <?php
 
     require ('connexiondb.php');
+    
 
     if (!empty($_POST)) {
         extract($_POST);
@@ -14,6 +15,10 @@
         if (isset($_POST['inscription'])) {  // SI CLIQUE SUR INSCRIPTION ALORS...
 
             // TESTS DU LOGIN --------------------------------------------------------------------------------------------------------------------
+
+            $testlogin = mysqli_query($mysqli, "SELECT * FROM utilisateurs WHERE login = '".$login."'") ; // LOGIN : DEJA UTILISE ?
+
+            $resultlogin = mysqli_num_rows($testlogin) ; // REQUETE SI LOGIN UTILISE
 
             if(empty($login)) {                                                         // LOGIN : CHAMP VIDE ?
 
@@ -36,11 +41,9 @@
                 $valid= false;
             }
 
-            $testlogin = mysqli_query($mysqli, "SELECT * FROM utilisateurs WHERE login = '".$login."'") ; // LOGIN : DEJA UTILISE ?
 
-            $resultlogin = mysqli_num_rows($testlogin) ;
 
-            if ($resultlogin == 1) {                                                                                         
+            elseif ($resultlogin == 1) {                                                                                         
 
                 $err_login = "Ce login est déjà utilisé.";
                 $valid = false;
@@ -51,7 +54,7 @@
 
             if(empty($mdp)) {                                                                //  MDP TEST SI VIDE
 
-                $err_password = "Veuillez renseigner votre mot de passe";
+                $err_mdp = "Veuillez renseigner votre mot de passe";
                 $valid=false;
             }
 
@@ -92,10 +95,8 @@
 
                 if (mysqli_query($mysqli, $inscription)) {
 
-                    echo "Vous êtes inscrit(e).";
-                    $inscriptionok = "Vous êtes inscrits.";
-
-                    //RAJOUTER LE HEADER LOCATION VERS CONNEXION
+                    
+                    header('Location: connexion.php');
                 }
 
             }
@@ -160,13 +161,24 @@
                         <div class="formerror"><?php if (isset($err_mdp)) { echo $err_mdp ;} ?></div>
                         <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe"></div>
 
-                        <div class="formerror"><?php if (isset($err_confirmmmdp)) { echo $err_confirmmdp ;} ?></div>
+                        <div class="formerror"><?php if (isset($err_confirmmdp)) { echo $err_confirmmdp ;} ?></div>
+                        <div class="formerror"><?php if (isset($err_confirm)) { echo $err_confirm ;} ?></div>
                         <div><input type="password" class="basicinput" name="confirmmdp" placeholder="Confirmez votre mot de passe"></div>
 
-                        <div class="formerror"><?php if (isset($err_confirm)) { echo $err_confirm ;} ?></div>
+                        
                         <div><input type="submit" class="submitbtn" name="inscription" value="S'inscrire"><br></div>
 
                     </form>
+
+                    <div class="boxregles">
+                        <ul class="regles">
+                            <li>Login : uniquement en lettres miniscules ou chiffres, sans caractères spéciaux, 25 caractères maximum.</li>
+                            <li>Mot de passe : entre 8 et 20 caractères, avec au moins 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial </li>
+                        </ul>
+                    </div>  
+
+
+
 
                     <!-- DEJA INSCRIT ? CONNEXION -->
 
