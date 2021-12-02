@@ -91,13 +91,13 @@
 
                 <form action="connexion.php" method="post" class="styleform">
 
-                    <div class="formerror"><?php if (isset($err_login)) { echo $err_login ;} ?></div><br>
+                    <div class="formerror"><?php if (isset($err_login)) { echo $err_login ;} ?></div>
                     <div><input type="text" class="basicinput" name="login" placeholder="Login"></div>
                     
-                    <div class="formerror"><?php if (isset($err_mdp)) { echo $err_mdp ;} ?></div><br>
+                    <div class="formerror"><?php if (isset($err_mdp)) { echo $err_mdp ;} ?></div>
                     <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe"></div>
 
-                    <div class="formerror"><?php if (isset($err_connexion)) { echo $err_connexion ;} ?></div><br>
+                    <div class="formerror"><?php if (isset($err_connexion)) { echo $err_connexion ;} ?></div>
                     <div><input type="submit" class="submitbtn" id="connexion" name="connexion" value="Connexion"><br></div>
 
                 </form>
