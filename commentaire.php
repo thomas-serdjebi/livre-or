@@ -9,7 +9,6 @@
    
 
     if (!isset($_SESSION['login'])) {                                                       // SI PAS DUTILISATEUR CONNECTE
-        echo "Erreur, vous n'êtes pas connecté.";
         $err_connexion = "Vous devez vous connecter pour accéder à cette page." ;
 
     } 
@@ -22,7 +21,6 @@
 
             if (empty($commentaire)) {
 
-                echo "Veuillez saisir votre commentaire";
                 $err_com = "Veuillez saisir votre commentaire";
             }
 
@@ -35,8 +33,6 @@
                 $resultid = mysqli_fetch_assoc($sqlid);
 
                 $id_utilisateur = $resultid['id'] ;
-
-                echo $id_utilisateur;
 
                 
 
@@ -84,27 +80,50 @@
             <section class="content">
 
                 
+                <?php if(!isset($_SESSION['login'])) { echo "
+                    <div class='erreur'>$err_connexion<br><br>
+
+
+                    
+                        <form action='inscription.php' method='get'>
+                            <button type='submit' class='submitbtn'>Inscription</button>
+                        </form>
+                    
+
+                    
+                        <form action='connexion.php' method='get'>
+                            <button type='submit' class='submitbtn'>Connexion</button>
+                        </form>
+                    </div>"; }
+                ?>
+
 
                 
-                <h1 class="titre"><?php if(isset($_SESSION['login'])) { echo $_SESSION['login'];}?>,</h1>
+                <?php if(isset($_SESSION['login'])) { echo"
+                <h1 class='titre' '".$_SESSION['login']."',</h1>
 
                 <div>
-                    <p class="intro">N'hésite pas à partager de ton expérience chez UrBar !</br>
+                    <p class='intro'>N'hésite pas à partager de ton expérience chez UrBar !</br>
                     Ecris et poste ton témoignage dans le formulaire ci-dessous !</br>
                     Il sera publié dans notre livre d'or !
                     </p>
                 </div>
                 
-                <div class="boxmodif">
+                <div class='boxmodif'>
                     <div>
-                        <form action="commentaire.php" method="post" class="styleform">
+                        <form action='commentaire.php' method='post' class='styleform'>
                             <div><textarea name='commentaire' rows='4' cols='55' placeholder='Commentaire'></textarea></div>
                             <div><input type='submit' name='commenter' value='Poster' ></div>
                         </form>  
                     </div>
                 </div>
+
+                ";} ?>
+                
+                
  
             </section>
+
 
                 
 

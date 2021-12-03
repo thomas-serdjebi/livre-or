@@ -10,6 +10,7 @@
 
     if (!isset($_SESSION['login'])) {                                                       // SI PAS DUTILISATEUR CONNECTE
         $err_connexion = "Vous devez vous connecter pour accéder à cette page." ;
+        header('Location: connexion.php');
 
     } 
 
@@ -153,7 +154,7 @@
             //                                                                                 // test ENTRE 8 ET 20 CARACTERES au moins 1 majuscule/miniscule/chiffres/caracspec
 
             elseif(!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/', $newmdp)) {
-                $err_newmdp = "Le nouveau mot de passe ne respecte pas les condtions : entre 8 et 20 caractères, minium 1 majuscule/miniscule/caractère spécial.";
+                $err_newmdp = "Le nouveau mot de passe ne respecte pas les conditions.*";
                 $validmdp = false;
 
             }
@@ -189,8 +190,7 @@
                     $openmdp = 0;                                                             // FERME LE FORMULAIRE MDP SI MODIF OK
                 }
 
-                else {
-                    echo "Le mot de passe n'a pas pu être modifié." ;                                  // AFFICHE LERREUR SI BUG
+                else {                               // AFFICHE LERREUR SI BUG
                     $err_modifmdp = "Le login n'a pas pu être modifié." ;
                 }
             }
@@ -233,20 +233,31 @@
                 
                 <div class="boxmodif">
                     <div id="loginstyle">
+
                         <form action="profil.php" method="post" class="styleform">
                             <div><input type="submit" name="loginform" value="Modifier le login" id="openlogin"></div>
                         </form>
+
                         <?php if ($openlogin == 1) { ?>
+
                             <form action ='profil.php' method='post' class='styleform'> 
-                                <div class="formerror"><?php if(isset($err_newlogin)) { echo $err_newlogin;} ?></div>
+
+                                <?php if(isset($err_newlogin)) { echo "<div class='formerror'> $err_newlogin </div>";} ?>
                                 <div><input type='text' name='newlogin' placeholder='Nouveau login'></div>
-                                <div class="formerror"><?php if(isset($err_confirmlogin)) { echo $err_confirmlogin;} ?></div>
+
+                                <?php if(isset($err_confirmlogin)) { echo "<div class='formerror'> $err_confirmlogin </div>";} ?>
                                 <div><input type='text' name='confirmlogin' placeholder='Confirmez le nouveau login'></div><br>
-                                <div class="formerror"><?php if(isset($err_2logins)) { echo $err_2logins;} ?></div>
-                                <div class="formerror"><?php if(isset($err_modiflogin)) { echo $err_modiflogin;} ?></div>
+
+                                <?php if(isset($err_2logins)) { echo "<div class='formerror'> $err_2logins </div>";} ?>
+                                <?php if(isset($err_modiflogin)) { echo "<div class='formerror'> $err_modiflogin </div>";} ?>
+
                                 <div><input type='submit' name='modiflogin' value='Modifier'></div>
+
+                                <div class="reglesmodif">Login : uniquement en lettres miniscules ou chiffres, sans caractères spéciaux, 25 caractères maximum.</div>
                             </form>
+
                         <?php ;}?>
+
                         <p class="intro"><?php if (isset($newloginok)) { echo $newloginok ;} ?></p>
                         
                     </div>
@@ -256,21 +267,33 @@
 
 
                     <div id="mdpstyle">
+
                         <form action="profil.php" method="post" class="styleform">
                             <div><input type="submit" name="mdpform" value="Modifier le mot de passe" id="openmdp"></div>
                         </form>
+
                         <?php if ($openmdp == 1) { ?>
+
                             <form action ='profil.php' method='post' class='styleform' id="passformstyle">
-                                <div class="formerror"><?php if(isset($err_actualmdp)) { echo $err_actualmdp;} ?></div>
+
+                                <?php if(isset($err_actualmdp)) { echo "<div class='formerror'> $err_actualmdp </div>";} ?>
                                 <div><input type='password' name='actualmdp' placeholder='Mot de passe actuel'></div>
-                                <div class="formerror"><?php if(isset($err_newmdp)) { echo $err_newmdp;} ?></div>
+
+                                <?php if(isset($err_newmdp)) { echo "<div class='formerror'> $err_newmdp </div>";} ?>
                                 <div><input type='password' name='newmdp' placeholder='Nouveau mot de passe'></div>
-                                <div class="formerror"><?php if(isset($err_confirmmdp)) { echo $err_confirmmdp;} ?></div>
+
+                                <?php if(isset($err_confirmmdp)) { echo "<div class='formerror'> $err_confirmmdp </div>";} ?>
                                 <div><input type='password' name='confirmmdp' placeholder='Confirmez le nouveau mot de passe'></div><br>
-                                <div class="formerror"><?php if(isset($err_modifmdp)) { echo $err_modifmdp;} ?></div>
-                                <div><input type='submit' name='modifmdp' value='Modifier'></div>
+
+                                <?php if(isset($err_modifmdp)) { echo "<div class='formerror'> $err_modifmdp </div>";} ?>
+                                <div><input type='submit' name='modifmdp' value='Modifier' id="butmdp"></div>
+
+                                <div class="reglesmodif" id="mdprules">Mot de passe : entre 8 et 20 caractères, avec au moins 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial.</div>
+
                             </form>
+
                         <?php ;}?>
+
                         <p class="intro"><?php if (isset($newmdpok)) { echo $newmdpok ;} ?></p>
                         
                     </div>

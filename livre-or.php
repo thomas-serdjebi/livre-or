@@ -34,25 +34,29 @@
         <?php require('header.php');?>
 
         <main>
-            <section> 
+            <section class="content"> 
 
-                <!-- TEXTE AVANT livre DOR -->
+                <h1 class="titre">Livre d'or</h1>
 
-            </section>
+                <div class="cadre-table-scroll">
+                    <table class="table-scroll">
+                        <?php foreach($result as $value) {
+                            $date = $value[2];
+                            $login = $value[1];
+                            $commentaire = $value[0];
+                            echo "<tr>
+                            <td> Posté le '".$date."'<br> par '".$login."' </td>
+                            <td> '".$commentaire."'</td>
+                            </tr>" ; }
+                        ?>
 
-            <section>
-                <table>
-                    <?php foreach($result as $value) {
-                        $date = $value[2];
-                        $login = $value[1];
-                        $commentaire = $value[0];
-                        echo "<tr>
-                        <td> Posté le '".$date."'<br> par '".$login."' </td>
-                        <td> '".$commentaire."'</td>
-                        </tr>" ; }
-                    ?>
+                    </table>
+                </div>
 
-                </table>
+                <?php if (isset($_SESSION['login'])) {?>
+                <div><a href="commentaire.php"><input type="button" class="submitbtn" value="Commenter"></a></div>
+                <?php } ?>
+
 
             </section>
 

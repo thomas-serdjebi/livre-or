@@ -22,21 +22,21 @@
 
             if(empty($login)) {                                                         // LOGIN : CHAMP VIDE ?
 
-                echo "Veuillez renseigner votre login";
-                $err_login = "Veuillez renseigner votre login";
+                
+                $err_login = "Veuillez renseigner votre login.";
                 $valid = false;
             }
 
             elseif (!preg_match("#^[a-z0-9]+$#" ,$login)) {                               // LOGIN : SANS MAJ, SANS SPEC, MIN ET CHIFFRES OK
 
-                echo "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux ou accents." ;
+                
                 $err_login = "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux." ;
                 $valid = false;
 
             }        
             
             elseif(strlen($login)>25) {                                                 // LOGIN : MAXIMUM 25 CARACTERES                         
-                echo "Le login ne doit pas dépasser 25 caractères." ;          
+                      
                 $err_login= "Le login est trop long, il dépasse 25 caractères.";
                 $valid= false;
             }
@@ -54,7 +54,7 @@
 
             if(empty($mdp)) {                                                                //  MDP TEST SI VIDE
 
-                $err_mdp = "Veuillez renseigner votre mot de passe";
+                $err_mdp = "Veuillez renseigner votre mot de passe.";
                 $valid=false;
             }
 
@@ -70,7 +70,7 @@
 
             if(empty($confirmmdp)) {                                                               // TEST CONFIRM MDP si vide
 
-                $err_confirmmdp = "Veuillez confirmer votre mot de passe";
+                $err_confirmmdp = "Veuillez confirmer votre mot de passe.";
                 $valid = false;
 
             }
@@ -155,14 +155,14 @@
 
                     <form action="inscription.php" method="post" class="styleform">
 
-                        <div class="formerror"><?php if (isset($err_login)) { echo $err_login ;} ?></div>
+                        <?php if(isset($err_login)) { echo "<div class='formerror'> $err_login </div>";} ?>
                         <div><input type="text" class="basicinput" name="login" placeholder="Login"></div>
                         
-                        <div class="formerror"><?php if (isset($err_mdp)) { echo $err_mdp ;} ?></div>
+                        <?php if(isset($err_mdp)) { echo "<div class='formerror'> $err_mdp </div>";} ?>
                         <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe"></div>
 
-                        <div class="formerror"><?php if (isset($err_confirmmdp)) { echo $err_confirmmdp ;} ?></div>
-                        <div class="formerror"><?php if (isset($err_confirm)) { echo $err_confirm ;} ?></div>
+                        <?php if(isset($err_confirmmdp)) { echo "<div class='formerror'> $err_confirmmdp </div>";} ?>
+                        <?php if(isset($err_confirm)) { echo "<div class='formerror'> $err_confirm </div>";} ?>
                         <div><input type="password" class="basicinput" name="confirmmdp" placeholder="Confirmez votre mot de passe"></div>
 
                         
@@ -173,7 +173,7 @@
                     <div class="boxregles">
                         <ul class="regles">
                             <li>Login : uniquement en lettres miniscules ou chiffres, sans caractères spéciaux, 25 caractères maximum.</li>
-                            <li>Mot de passe : entre 8 et 20 caractères, avec au moins 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial </li>
+                            <li>Mot de passe : entre 8 et 20 caractères, avec au moins 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial. </li>
                         </ul>
                     </div>  
 

@@ -12,7 +12,7 @@ header {
     width:100%;
     display:flex;
     flex-direction:row;
-    height:150px;
+    height:160px;
     margin-bottom:0px;
 }
 
@@ -21,6 +21,7 @@ header {
     height:auto;
     width:120px;
     margin-left:10%;
+    padding-top:10px;
     
 }
 
@@ -35,6 +36,8 @@ header {
 
 .hbuttons {
     margin-right: 50%;
+    position:relative;
+    right: 10px;
 }
 
 /* BOX SESSION LOGIN */
@@ -101,9 +104,7 @@ header {
     position: absolute;
     background-color:black;
     box-shadow: 0px 8px 16px 0px orange;
-    width:120px;
     border-radius:10%;
-    
 }
 
 /* Links inside the dropdown */
@@ -112,11 +113,18 @@ header {
     padding: 10px 14px;
     text-decoration: none;
     display: block;
-    width:120px;
+    border-radius:10%;
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+    color: black;
+    background-color: orange;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
 
+    border-radius:10%;
+    
+}
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
