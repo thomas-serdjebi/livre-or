@@ -37,7 +37,7 @@ window.onclick = function(event) {
     <div class="hleftbox">
 
         <div class="hleftboxsup">
-            <a href="index.php"><img src="assets/logo" alt="logo" class="headerlogo" ></a>
+            <a href="index.php"><img src="assets/logo.png" alt="logo" class="headerlogo" ></a>
         </div>
 
 

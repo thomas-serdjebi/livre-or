@@ -38,19 +38,21 @@
 
                 <h1 class="titre">Livre d'or</h1>
 
-                <div class="cadre-table-scroll">
-                    <table class="table-scroll">
-                        <?php foreach($result as $value) {
-                            $date = $value[2];
-                            $login = $value[1];
-                            $commentaire = $value[0];
-                            echo "<tr>
-                            <td> Posté le '".$date."'<br> par '".$login."' </td>
-                            <td> '".$commentaire."'</td>
-                            </tr>" ; }
-                        ?>
+                <div class="scrollbarhidden">
+                    <div class="cadre-table-scroll">
+                        <table class="table-scroll">
+                            <?php foreach($result as $value) {
+                                $date = $value[2];
+                                $login = $value[1];
+                                $commentaire = $value[0];
+                                echo "<tr>
+                                <td> Posté le '".$date."'<br> par '".$login."' </td>
+                                <td> '".$commentaire."'</td>
+                                </tr>" ; }
+                            ?>
 
-                    </table>
+                        </table>
+                    </div>
                 </div>
 
                 <?php if (isset($_SESSION['login'])) {?>

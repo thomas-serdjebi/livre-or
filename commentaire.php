@@ -40,6 +40,8 @@
 
                 $com = mysqli_query($mysqli, "INSERT INTO commentaires (commentaire, id_utilisateur, date) VALUES ('".$commentaire."','".$id_utilisateur."',now())");
 
+                $posted = "Merci pour ton commentaire !" ;
+
 
                 
 
@@ -97,10 +99,11 @@
                     </div>"; }
                 ?>
 
-
+                <p class ="intro"><?php if (isset($posted)) { echo $posted ;} ?></p>
                 
                 <?php if(isset($_SESSION['login'])) { echo"
                 <h1 class='titre' '".$_SESSION['login']."',</h1>
+
 
                 <div>
                     <p class='intro'>N'hésite pas à partager de ton expérience chez UrBar !</br>
@@ -117,8 +120,11 @@
                         </form>  
                     </div>
                 </div>
+                
 
                 ";} ?>
+
+                
                 
                 
  

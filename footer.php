@@ -18,7 +18,7 @@
 
             <div id="rdvfoot"> Retrouvez toutes les infos sur <a href="https://laplateforme.io/" target="_blank" class="lienfooter">La Plateforme_</a></div>
 
-            <div><a href="https://laplateforme.io/" class="lienfooter"><img src="assets/logoplateforme.JPG" alt="logoplateforme" class="logoplateforme"></div>
+            <div><a href="https://laplateforme.io/" class="lienfooter"><img src="assets/logoplateforme.png" alt="logoplateforme" class="logoplateforme"></div>
 
                 <div class="footersocialboxes">
 
